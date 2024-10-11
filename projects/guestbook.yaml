@@ -12,9 +12,11 @@ spec:
       revision: HEAD
       files:
       - path: "cluster-config/**/config.json"
+      values:
+        base_dir: "{{index .path.segments 0}}/{{index .path.segments 1}}/{{index .path.segments 2}}"      
   template:
     metadata:
-      name: '{{.cluster.name}}-guestbook'
+      name: 'guestbook-{{.cluster.name}}'
     spec:
       project: default
       source:
@@ -23,7 +25,7 @@ spec:
         path: "apps/guestbook"
       destination:
         server: '{{.cluster.address}}'
-        namespace: '{{.cluster.name}}-guestbook'
+        namespace: 'guestbook-{{.cluster.name}}'
       syncPolicy:
         automated:
           prune: true
