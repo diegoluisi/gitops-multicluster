@@ -12,8 +12,6 @@ spec:
       revision: HEAD
       files:
       - path: "cluster-config/**/config.json"
-      values:
-        base_dir: "{{index .path.segments 0}}/{{index .path.segments 1}}/{{index .path.segments 2}}"      
   template:
     metadata:
       name: 'guestbook-{{.cluster.name}}'
@@ -23,6 +21,9 @@ spec:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: HEAD
         path: "apps/guestbook"
+        # helm:
+        #   valueFiles:
+        #     - ../values/{{ environment }}.yaml        
       destination:
         server: '{{.cluster.address}}'
         namespace: 'guestbook-{{.cluster.name}}'
