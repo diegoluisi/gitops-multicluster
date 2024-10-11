@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: guestbook
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+      revision: HEAD
+      files:
+      - path: "cluster-config/**/config.json"
+  template:
+    metadata:
+      name: '{{.cluster.name}}-guestbook'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+        targetRevision: HEAD
+        path: "apps/guestbook"
+      destination:
+        server: '{{.cluster.address}}'
+        namespace: guestbook
