@@ -16,7 +16,7 @@ spec:
         - clusters:
             selector:
               matchLabels:
-                cluster-addons: true
+                cluster-addons: "true"
   template:
     metadata:
       name: '{{.path.basename}}-{{.name}}'
