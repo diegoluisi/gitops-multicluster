@@ -1,9 +1,15 @@
-source:
-  repo: https://jkroepke.github.io/helm-charts/
-  chart: example
-  version: 0.1.0
-target:
-  namespace: example
-valuesFiles:
-  - values.yaml
-
+appName: crossplane
+userGivenName: crossplane
+destNamespace: crossplane-system
+destServer: https://kubernetes.default.svc
+srcPath: ""
+repoURL: https://kubernetes-sigs.github.io/crossplane-system/
+srcRepoURL: https://charts.crossplane.io/stable
+srcTargetRevision: "1.8.0"
+labels:
+exclude: ""
+include: ""
+helm:
+  chart: crossplane
+  valueFiles: values
+  values: |-
