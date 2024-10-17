@@ -1,0 +1,9 @@
+source:
+  repo: https://jkroepke.github.io/helm-charts/
+  chart: example
+  version: 0.1.0
+target:
+  namespace: example
+valuesFiles:
+  - values.yaml
+

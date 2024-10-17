@@ -11,8 +11,11 @@ spec:
         - git:
             repoURL: https://github.com/diegoluisi/gitops-multicluster.git
             revision: HEAD
-            directories:
-            - path: cluster-addons/*
+            files:
+              - path: cluster-addons/**/config.yaml
+
+            # directories:
+            # - path: cluster-addons/*
         - clusters:
             selector:
               matchLabels:
