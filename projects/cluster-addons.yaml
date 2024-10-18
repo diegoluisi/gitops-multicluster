@@ -30,8 +30,8 @@ spec:
       project: '{{.values.project}}'
       source:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
-        targetRevision: "{{ .srcTargetRevision }}"
-        path: "{{.path.path}}/{{.cluster}}"
+        targetRevision: HEAD
+        path: '{{.path.path}}/{{.cluster}}'
       destination:
         server: "{{.url}}'"
         namespace: "{{.path.basename}}"
