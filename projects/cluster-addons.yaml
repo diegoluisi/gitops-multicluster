@@ -29,7 +29,7 @@ spec:
     spec:
       project: '{{.values.project}}'
       source:
-        repoURL: "{{ .srcRepoURL }}"
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: "{{ .srcTargetRevision }}"
         path: "{{.path.path}}/{{.cluster}}"
       destination:
