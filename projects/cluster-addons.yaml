@@ -27,16 +27,16 @@ spec:
                 cluster-addons: "true"
   template:
     metadata:
-      name: '{{.path.basename}}-{{.userGivenName}}'
+      name: '{{.userGivenName}}-{{.path.basename}}'
     spec:
       project: 'default'
       source:
-        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
-        targetRevision: HEAD
-        path: '{{.path.path}}'
+        repoURL: "{{ srcRepoURL }}"
+        targetRevision: "{{ srcTargetRevision }}"
+        path: "{{ srcPath }}"
       destination:
-        server: '{{.server}}'
-        namespace: '{{.path.basename}}'
+        server: "{{.server}}"
+        namespace: '{{ destNamespace }}'
       syncPolicy:
         automated:
           prune: true
