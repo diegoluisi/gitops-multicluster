@@ -31,10 +31,10 @@ spec:
       source:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: HEAD
-        path: '{{.userGivenName}}/overlays/{{.cluster}}'
+        path: '{{.path.path}}'
       destination:
-        server: "{{.url}}'"
-        namespace: "{{.path.path}}"
+        server: '{{.url}}'
+        namespace: '{{.path.basename}}'
       syncPolicy:
         automated:
           prune: true
