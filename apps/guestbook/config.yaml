@@ -1,0 +1,14 @@
+appName: example
+userGivenName: example
+destNamespace: example
+srcPath: "cluster-addons/guestbook"
+repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+srcRepoURL: https://jkroepke.github.io/helm-charts/
+srcTargetRevision: "0.1.0"
+labels:
+exclude: ""
+include: ""
+helm:
+  chart: crossplane
+  valueFiles: values
+  values: |-
