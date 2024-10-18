@@ -22,7 +22,7 @@ spec:
             - cluster: engineering-prod
               url: https://1.2.3.4
               values:
-                project: prod
+                project: prd
   template:
     metadata:
       name: '{{.path.basename}}-{{.cluster}}'
