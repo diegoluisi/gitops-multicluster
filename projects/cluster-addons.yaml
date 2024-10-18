@@ -8,9 +8,32 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
-        revision: HEAD
+        revision: ""
         files:
-        - path: cluster-addons/**/overlays/**/config.json
+        - path: cluster-addons/**/overlays/engineering-dev/config.json
+        requeueAfterSeconds: 20
+        template:
+          metadata: {}
+          spec:
+            destination:
+              server: https://kubernetes.default.svc
+            project: "dev"
+            source:
+              repoURL: ""        
+    - git:
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+        revision: ""
+        files:
+        - path: cluster-addons/**/overlays/engineering-prd/config.json
+        requeueAfterSeconds: 20
+        template:
+          metadata: {}
+          spec:
+            destination:
+              server: https://4.3.2.1
+            project: "prd"
+            source:
+              repoURL: ""                      
   template:
     metadata:
       name: '{{.userGivenName}}-{{.path.basename}}'
