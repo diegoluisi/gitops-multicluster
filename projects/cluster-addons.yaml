@@ -6,27 +6,11 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - matrix:
-        generators:
-          - union:
-              mergeKeys:
-                - cluster
-              generators:
-                - git:
-                    repoURL: https://github.com/diegoluisi/gitops-multicluster.git
-                    revision: HEAD
-                    files:
-                    - path: cluster-addons/**/overlays/**/config.json
-                - list:
-                    elements:
-                    - cluster: engineering-dev
-                      url: https://kubernetes.default.svc
-                      values:
-                        project: dev
-                    - cluster: engineering-prod
-                      url: https://1.2.3.4
-                      values:
-                        project: prd
+    - git:
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+        revision: HEAD
+        files:
+        - path: cluster-addons/**/overlays/**/config.json
   template:
     metadata:
       name: '{{.path.basename}}-{{.cluster}}'

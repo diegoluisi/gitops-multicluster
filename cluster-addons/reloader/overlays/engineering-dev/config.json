@@ -2,6 +2,9 @@
   "appName": "reloader",
   "userGivenName": "reloader",
   "destNamespace": "reloader",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "cluster-addons/reloader/overlays/eks-dev-01",
+  "srcRepoURL": "https://github.com/diegoluisi/gitops-multicluster.git",
   "srcTargetRevision": "",
   "CreateNamespace": true,
   "labels": null
