@@ -10,7 +10,7 @@ spec:
       generators:
         - git:
             files:
-              - path: cluster-addons/**/overlays/eks-dev-01/config.json
+              - path: cluster-addons/**/overlays/**/config.json
             repoURL: https://github.com/diegoluisi/gitops-multicluster.git
             requeueAfterSeconds: 20
             revision: ""
@@ -39,7 +39,7 @@ spec:
       source:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: "{{ .srcTargetRevision }}"
-        path: "{{ .srcPath }}"
+        path: "cluster-addons/**/overlays/{{.cluster}}/"
       destination:
         server: "{{.url}}'"
         namespace: '{{ .destNamespace }}'
