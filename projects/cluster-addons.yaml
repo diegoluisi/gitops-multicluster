@@ -28,12 +28,12 @@ spec:
               values:
                 project: dev
             - cluster: engineering-prod
-              url: https://kubernetes.default.svc
+              url: https://1.2.3.4
               values:
                 project: prod
   template:
     metadata:
-      name: '{{.userGivenName}}-{{.path.basename}}'
+      name: '{{.userGivenName}}-{{.cluster}}'
     spec:
       project: 'default'
       source:
@@ -41,7 +41,7 @@ spec:
         targetRevision: "{{ .srcTargetRevision }}"
         path: "{{ .srcPath }}"
       destination:
-        server: "{{.server}}"
+        server: "{{.url}}'"
         namespace: '{{ .destNamespace }}'
       syncPolicy:
         automated:
