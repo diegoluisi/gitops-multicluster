@@ -3,8 +3,6 @@
   "userGivenName": "reloader",
   "destNamespace": "reloader",
   "destServer": "https://1.2.3.4",
-  "srcPath": "cluster-addons/reloader/overlays/eks-dev-01",
-  "srcRepoURL": "https://github.com/diegoluisi/gitops-multicluster.git",
   "srcTargetRevision": "",
   "CreateNamespace": true,
   "labels": null
