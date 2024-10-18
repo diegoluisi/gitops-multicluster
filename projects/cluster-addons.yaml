@@ -11,8 +11,8 @@ spec:
         - git:
             repoURL: https://github.com/diegoluisi/gitops-multicluster.git
             revision: HEAD
-            directories:
-            - path: cluster-addons/**/overlays/*
+            files:
+            - path: cluster-addons/**/overlays/config.json
         - list:
             elements:
             - cluster: engineering-dev
