@@ -21,7 +21,7 @@ spec:
         targetRevision: HEAD
         path: '{{.path.path}}'
       destination:
-        server: '{{.url}}'
+        server: '{{.destServer}}'
         namespace: '{{.path.basename}}'
       syncPolicy:
         automated:
