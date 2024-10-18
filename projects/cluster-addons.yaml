@@ -15,7 +15,7 @@ spec:
     metadata:
       name: '{{.path.basename}}-{{.destServer}}'
     spec:
-      project: '{{.values.project}}'
+      project: default
       source:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: HEAD
