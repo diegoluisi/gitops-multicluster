@@ -25,7 +25,7 @@ spec:
                 project: prd
   template:
     metadata:
-      name: '{{.userGivenName}}-{{.cluster}}'
+      name: '{{.path.basename}}-{{.cluster}}'
     spec:
       project: '{{.values.project}}'
       source:
@@ -34,7 +34,7 @@ spec:
         path: '{{.userGivenName}}/overlays/{{.cluster}}'
       destination:
         server: "{{.url}}'"
-        namespace: "{{.path.basename}}"
+        namespace: "{{.path.path}}"
       syncPolicy:
         automated:
           prune: true
