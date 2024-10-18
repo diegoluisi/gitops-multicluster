@@ -9,13 +9,18 @@ spec:
   - matrix:
       generators:
         - git:
-            repoURL: https://github.com/diegoluisi/gitops-multicluster.git
-            revision: HEAD
             files:
-              - path: cluster-addons/**/config.yaml
+              - path: cluster-addons/**/overlays/**/config.json
+            repoURL: https://github.com/diegoluisi/gitops-multicluster.git
             requeueAfterSeconds: 20
-            # directories:
-            # - path: cluster-addons/*
+            revision: ""
+            template:
+              metadata: {}
+              spec:
+                destination: {}
+                project: ""
+                source:
+                  repoURL: ""
         - clusters:
             selector:
               matchLabels:
