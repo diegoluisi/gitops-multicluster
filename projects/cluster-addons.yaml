@@ -12,7 +12,7 @@ spec:
             repoURL: https://github.com/diegoluisi/gitops-multicluster.git
             revision: HEAD
             directories:
-            - path: cluster-addons/**/overlays/*
+            - path: cluster-addons/**/overlays/config.json
         - list:
             elements:
             - cluster: engineering-dev
@@ -25,13 +25,13 @@ spec:
                 project: prd
   template:
     metadata:
-      name: '{{.path.basename}}-{{.cluster}}'
+      name: '{{.userGivenName}}-{{.cluster}}'
     spec:
       project: '{{.values.project}}'
       source:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: HEAD
-        path: '{{.path.path}}/{{.cluster}}'
+        path: 'cluster-addons/{{.userGivenName}}/overlays/{{.cluster}}'
       destination:
         server: "{{.url}}'"
         namespace: "{{.path.basename}}"
