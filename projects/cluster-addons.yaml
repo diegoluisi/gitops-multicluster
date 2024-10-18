@@ -27,29 +27,29 @@ spec:
                       url: https://1.2.3.4
                       values:
                         project: prd
-        template:
-          metadata:
-            name: '{{.path.basename}}-{{.cluster}}'
-          spec:
-            project: '{{.values.project}}'
-            source:
-              repoURL: https://github.com/diegoluisi/gitops-multicluster.git
-              targetRevision: HEAD
-              path: '{{.path.path}}'
-            destination:
-              server: '{{.url}}'
-              namespace: '{{.path.basename}}'
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              retry:
-                limit: 10
-                backoff:
-                  duration: 1m
-                  factor: 2
-                  maxDuration: 16m
-              syncOptions:
-                - CreateNamespace=true
-                - ApplyOutOfSyncOnly=true
-                - ServerSideApply=true               
+  template:
+    metadata:
+      name: '{{.path.basename}}-{{.cluster}}'
+    spec:
+      project: '{{.values.project}}'
+      source:
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+      destination:
+        server: '{{.url}}'
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 10
+          backoff:
+            duration: 1m
+            factor: 2
+            maxDuration: 16m
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true               
