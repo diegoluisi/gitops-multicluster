@@ -9,15 +9,10 @@ spec:
   - matrix:
       generators:
         - git:
-            files:
-              - path: cluster-addons/**/overlays/**/config.json
-            requeueAfterSeconds: 20
-            revision: ""
-            template:
-              metadata: {}
-              spec:
-                source:
-                  repoURL: ""
+            repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+            revision: HEAD
+            directories:
+            - path: cluster-addons/**/overlays/*
         - list:
             elements:
             - cluster: engineering-dev
@@ -30,16 +25,16 @@ spec:
                 project: prod
   template:
     metadata:
-      name: '{{.userGivenName}}-{{.cluster}}'
+      name: '{{.path.basename}}-{{.cluster}}'
     spec:
-      project: "{{.values.project}}"
+      project: '{{.values.project}}'
       source:
-        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+        repoURL: "{{ srcRepoURL }}"
         targetRevision: "{{ .srcTargetRevision }}"
-        path: "cluster-addons/**/overlays/{{.cluster}}"
+        path: "{{.path.path}}/{{.cluster}}"
       destination:
         server: "{{.url}}'"
-        namespace: '{{ .destNamespace }}'
+        namespace: "{{.path.basename}}"
       syncPolicy:
         automated:
           prune: true
