@@ -11,14 +11,11 @@ spec:
         - git:
             files:
               - path: cluster-addons/**/overlays/**/config.json
-            repoURL: https://github.com/diegoluisi/gitops-multicluster.git
             requeueAfterSeconds: 20
             revision: ""
             template:
               metadata: {}
               spec:
-                destination: {}
-                project: ""
                 source:
                   repoURL: ""
         - list:
@@ -35,11 +32,11 @@ spec:
     metadata:
       name: '{{.userGivenName}}-{{.cluster}}'
     spec:
-      project: 'default'
+      project: "{{.values.project}}"
       source:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: "{{ .srcTargetRevision }}"
-        path: "cluster-addons/**/overlays/{{.cluster}}/"
+        path: "cluster-addons/**/overlays/{{.cluster}}"
       destination:
         server: "{{.url}}'"
         namespace: '{{ .destNamespace }}'
