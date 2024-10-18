@@ -13,7 +13,7 @@ spec:
         - path: cluster-addons/**/overlays/**/config.json
   template:
     metadata:
-      name: '{{.path.basename}}-{{.cluster}}'
+      name: '{{.path.basename}}-{{.destServer}}'
     spec:
       project: '{{.values.project}}'
       source:
