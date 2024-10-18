@@ -21,10 +21,16 @@ spec:
                 project: ""
                 source:
                   repoURL: ""
-        - clusters:
-            selector:
-              matchLabels:
-                cluster-addons: "true"
+        - list:
+            elements:
+            - cluster: engineering-dev
+              url: https://kubernetes.default.svc
+              values:
+                project: dev
+            - cluster: engineering-prod
+              url: https://kubernetes.default.svc
+              values:
+                project: prod
   template:
     metadata:
       name: '{{.userGivenName}}-{{.path.basename}}'
