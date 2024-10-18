@@ -1,4 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  annotations:
+    argocd-autopilot.argoproj-labs.io/default-dest-server: https://kubernetes.default.svc
+    argocd.argoproj.io/sync-options: PruneLast=true
+    argocd.argoproj.io/sync-wave: "-2"
+  creationTimestamp: null
+  name: cluster-addons
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  description: "Cluster-Addons Project"
+  destinations:
+    - namespace: "*"
+      server: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  sourceRepos:
+    - "*"
+status: {}
+---
+
+apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: cluster-addons
@@ -17,7 +43,7 @@ spec:
           spec:
             destination:
               server: https://kubernetes.default.svc
-            project: "dev"
+            project: "cluster-addons"
             source:
               repoURL: ""        
     - git:
@@ -31,7 +57,7 @@ spec:
           spec:
             destination:
               server: https://4.3.2.1
-            project: "prd"
+            project: "cluster-addons"
             source:
               repoURL: ""                      
   template:
