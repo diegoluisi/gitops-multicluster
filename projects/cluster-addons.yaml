@@ -9,7 +9,7 @@ spec:
     # Directory generator for detecting each addon inside cluster-addons/
     - git:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git  # Your GitOps repo
-        revision: HEAD  # Branch or tag to track
+        revision: ""  # Branch or tag to track
         files:
           - path: cluster-addons/**/config.json  # Look for all directories under cluster-addons
         requeueAfterSeconds: 20  # Requeue every 20 seconds
