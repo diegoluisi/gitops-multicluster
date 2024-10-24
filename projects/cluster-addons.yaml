@@ -30,12 +30,12 @@ spec:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: "{{ .srcTargetRevision }}"
       destination:
-        namespace: '"{{.path.basename}}'
-        server: "{{ .destServer }}"
+        namespace: '{{.path.basename}}'
+        server: '{{ .destServer }}'
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
-          - CreateNamespace={{ .CreateNamespace }}          
+          - CreateNamespace='{{default "true" .CreateNamespace }}'
 status: {}
