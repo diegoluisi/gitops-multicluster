@@ -6,40 +6,36 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - matrix:
-        generators:
-          # List generator for clusters
-          - list:
-              elements:
-                - cluster: dev
-                  server: https://kubernetes.default.svc
-                - cluster: stg
-                  server: https://1.2.3.4
-                - cluster: prd
-                  server: https://4.3.2.1    
-          # Directory generator for detecting each addon inside cluster-addons/
-          - git:
-              repoURL: https://github.com/diegoluisi/gitops-multicluster.git  # Your GitOps repo
-              revision: HEAD  # Branch or tag to track
-              files:
-                - path: cluster-addons/**/config.json  # Look for all directories under cluster-addons
+    # Directory generator for detecting each addon inside cluster-addons/
+    - git:
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git  # Your GitOps repo
+        revision: HEAD  # Branch or tag to track
+        files:
+          - path: cluster-addons/**/config.json  # Look for all directories under cluster-addons
+        requeueAfterSeconds: 20  # Requeue every 20 seconds
+        template:
+          metadata: {}
+          spec:
+            destination: {}
+            project: ""
+            source:
+              repoURL: ""          
   template:
     metadata:
-      name: "{{.path.basename}}-{{.cluster}}"  # App name will be addon name + cluster
+      name: "{{.path.basename}}-{{.appName}}"  # App name will be addon name + cluster
     spec:
       project: default
       source:
-        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
-        targetRevision: HEAD
-        path: "{{.path}}"  # Uses the detected path from the directory generator
-        helm:
-          valueFiles:
-            - values.yaml  # Default values
-            - values-{{.cluster}}.yaml  # Cluster-specific values
+        path: "{{ srcPath }}"
+        repoURL: "{{ srcRepoURL }}"
+        targetRevision: "{{ srcTargetRevision }}"
       destination:
-        server: "{{.cluster.server}}"
-        namespace: '{{.path.basename}}'
+        namespace: "{{ destNamespace }}"
+        server: "{{ destServer }}"
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
+        syncOptions:
+          - CreateNamespace={{ CreateNamespace }}          
+status: {}
