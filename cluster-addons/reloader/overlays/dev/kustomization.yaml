@@ -8,7 +8,7 @@ helmCharts:
     releaseName: reloader
     version: 1.1.0
     repo: https://stakater.github.io/stakater-charts
-    valuesFile: ../../base/values.yaml
+    valuesFile: ../../../../clusters/values-global.yaml
     additionalValuesFiles:
-      - ../../../../clusters/values-global.yaml
+      - ../../base/values.yaml
       - values.yaml

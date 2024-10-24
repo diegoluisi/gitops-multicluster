@@ -10,5 +10,7 @@ configMapGenerator:
       - files/repository.credentials  
     literals:
       - admin.enabled=true
+      - application.instanceLabelKey="argocd.argoproj.io/instance"
       - kustomize.buildOptions="--enable-alpha-plugins --enable-helm --load-restrictor=LoadRestrictionsNone"
+      - statusbadge.enabled=true
 
