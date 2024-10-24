@@ -18,7 +18,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: "{{ .repoURL | default 'https://github.com/diegoluisi/gitops-multicluster.git' }}"  # Fallback to default if missing
+        repoURL: "{{ .repoURL }}"  # Fallback to default if missing
         targetRevision: "{{ .srcTargetRevision | default 'HEAD' }}"  # Default to HEAD if not provided
         path: "{{ .path.path }}"  # The path to the addon
       destination:
