@@ -27,7 +27,7 @@ spec:
       project: default
       source:
         path: "{{ .srcPath }}"
-        repoURL: "{{ .srcRepoURL }}"
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: "{{ .srcTargetRevision }}"
       destination:
         namespace: "{{ .destNamespace }}"
