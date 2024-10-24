@@ -19,7 +19,7 @@ spec:
       project: default
       source:
         repoURL: "{{ .srcRepoURL }}"  # Fallback to default if missing
-        targetRevision: "{{ .srcTargetRevision | default 'HEAD' }}"  # Default to HEAD if not provided
+        targetRevision: "{{ .srcTargetRevision }}"  # Default to HEAD if not provided
         path: "{{ .path.path }}"  # The path to the addon
       destination:
         namespace: '{{ .destNamespace }}'  # Default namespace
