@@ -22,7 +22,7 @@ spec:
         targetRevision: "{{ .srcTargetRevision | default 'HEAD' }}"  # Default to HEAD if not provided
         path: "{{ .path.path }}"  # The path to the addon
       destination:
-        namespace: '{{ .destNamespace | default "default" }}'  # Default namespace
+        namespace: '{{ .destNamespace }}'  # Default namespace
         server: '{{ .destServer }}'  # Default API server
       syncPolicy:
         automated:
