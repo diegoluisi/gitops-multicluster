@@ -23,7 +23,7 @@ spec:
         path: "{{ .path.path }}"  # The path to the addon
       destination:
         namespace: '{{ .destNamespace | default "default" }}'  # Default namespace
-        server: '{{ .destServer | default "https://kubernetes.default.svc" }}'  # Default API server
+        server: '{{ .destServer }}'  # Default API server
       syncPolicy:
         automated:
           prune: true
