@@ -3,6 +3,8 @@ kind: ApplicationSet
 metadata:
   name: cluster-addons
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
     - matrix:
         generators:
@@ -23,19 +25,19 @@ spec:
                 - path: cluster-addons/**/config.json  # Look for all directories under cluster-addons
   template:
     metadata:
-      name: "{{path.basename}}-{{cluster}}"  # App name will be addon name + cluster
+      name: "{{.path.basename}}-{{.cluster}}"  # App name will be addon name + cluster
     spec:
       project: default
       source:
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: HEAD
-        path: "{{path}}"  # Uses the detected path from the directory generator
+        path: "{{.path}}"  # Uses the detected path from the directory generator
         helm:
           valueFiles:
             - values.yaml  # Default values
-            - values-{{cluster}}.yaml  # Cluster-specific values
+            - values-{{.cluster}}.yaml  # Cluster-specific values
       destination:
-        server: "{{cluster.server}}"
+        server: "{{.cluster.server}}"
         namespace: '{{.path.basename}}'
       syncPolicy:
         automated:
