@@ -2,7 +2,6 @@
     "appName": "reloader",
     "destServer": "https://kubernetes.default.svc",
     "destNamespace": "reloader",
-    "CreateNamespace": true,
     "srcRepoURL": "",
     "srcTargetRevision": "",
     "labels": null

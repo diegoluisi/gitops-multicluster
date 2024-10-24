@@ -7,11 +7,18 @@ spec:
   goTemplateOptions: ["missingkey=error"]  # You can switch to "missingkey=default" to avoid hard errors.
   generators:
     - git:
-        repoURL: https://github.com/diegoluisi/gitops-multicluster.git  # Your GitOps repo
-        revision: HEAD  # Ensure you are tracking a valid branch or tag
         files:
           - path: cluster-addons/**/config.json  # Look for all directories under cluster-addons
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git  # Your GitOps repo
         requeueAfterSeconds: 20  # Requeue every 20 seconds
+        revision: "" # Ensure you are tracking a valid branch or tag
+        template:
+          metadata: {}
+          spec:
+            destination: {}
+            project: ""
+            source:
+              repoURL: ""        
   template:
     metadata:
       name: "{{ .path.basename }}-{{ .appName  }}"  # App name will be addon name + cluster
