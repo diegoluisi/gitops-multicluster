@@ -1,0 +1,88 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  annotations:
+    argocd-autopilot.argoproj-labs.io/default-dest-server: https://kubernetes.default.svc
+    argocd.argoproj.io/sync-options: PruneLast=true
+    argocd.argoproj.io/sync-wave: "-2"
+  creationTimestamp: null
+  name: cluster-addons
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  description: "Cluster-Addons Project"
+  destinations:
+    - namespace: "*"
+      server: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  sourceRepos:
+    - "*"
+status: {}
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-addons
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+        revision: ""
+        files:
+        - path: cluster-addons/**/overlays/engineering-dev/config.json
+        requeueAfterSeconds: 20
+        template:
+          metadata: {}
+          spec:
+            destination:
+              server: https://kubernetes.default.svc
+            project: "cluster-addons"
+            source:
+              repoURL: ""        
+    - git:
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+        revision: ""
+        files:
+        - path: cluster-addons/**/overlays/engineering-prd/config.json
+        requeueAfterSeconds: 20
+        template:
+          metadata: {}
+          spec:
+            destination:
+              server: https://4.3.2.1
+            project: "cluster-addons"
+            source:
+              repoURL: ""                      
+  template:
+    metadata:
+      name: '{{.userGivenName}}-{{.path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/diegoluisi/gitops-multicluster.git
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+      destination:
+        server: '{{.destServer}}'
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 10
+          backoff:
+            duration: 1m
+            factor: 2
+            maxDuration: 16m
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - ServerSideApply=true               
