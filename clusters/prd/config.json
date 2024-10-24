@@ -1,9 +1,0 @@
-{
-    "aws_account": "111111",
-    "asset_id": "111111",
-    "cluster": {
-        "owner": "cluster-admin@company.com",
-        "name": "prd",
-        "address": "https://kubernetes.default.svc"
-    }
-}
