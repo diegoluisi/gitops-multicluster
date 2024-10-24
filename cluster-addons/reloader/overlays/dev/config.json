@@ -1,8 +1,6 @@
 {
     "appName": "reloader",
-    "userGivenName": "reloader",
-    "destNamespace": "reloader",
-    "srcTargetRevision": "",
+    "destServer": "https://kubernetes.default.svc",
     "CreateNamespace": true,
     "labels": null
 }
