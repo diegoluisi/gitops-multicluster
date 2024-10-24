@@ -26,11 +26,11 @@ spec:
     spec:
       project: default
       source:
-        path: "{{ .srcPath }}"
+        path: '{{.path.path}}'
         repoURL: https://github.com/diegoluisi/gitops-multicluster.git
         targetRevision: "{{ .srcTargetRevision }}"
       destination:
-        namespace: "{{ .destNamespace }}"
+        namespace: '"{{.path.basename}}'
         server: "{{ .destServer }}"
       syncPolicy:
         automated:
