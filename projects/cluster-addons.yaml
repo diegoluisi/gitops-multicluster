@@ -26,16 +26,16 @@ spec:
     spec:
       project: default
       source:
-        path: "{{ srcPath }}"
-        repoURL: "{{ srcRepoURL }}"
-        targetRevision: "{{ srcTargetRevision }}"
+        path: "{{ .srcPath }}"
+        repoURL: "{{ .srcRepoURL }}"
+        targetRevision: "{{ .srcTargetRevision }}"
       destination:
-        namespace: "{{ destNamespace }}"
-        server: "{{ destServer }}"
+        namespace: "{{ .destNamespace }}"
+        server: "{{ .destServer }}"
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
-          - CreateNamespace={{ CreateNamespace }}          
+          - CreateNamespace={{ .CreateNamespace }}          
 status: {}
